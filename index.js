@@ -1,9 +1,14 @@
 const express = require("express");
-require("./mongodb")
+const userRouter = require("./Routers/user.router.js");
+// require("./mongodb")
 
 const app = express();
+app.use(express.json())
+
+app.use("/user",userRouter);
 
 app.get("/",(req,res)=>res.send("User authentication and Movie API"))
+
 
 //Global error handler
 app.use((err,req,res,next)=>{
