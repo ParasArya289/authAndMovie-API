@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const {createAccount,findUserByUsername,changeUserPassword,changeUserProfile,changeUserContactDetails} = require("../Queries/user.queries.js");
+const {createAccount,findUserByUsername,changeUserPassword,changeUserProfile,changeUserContactDetails,findUserByPhoneNumber} = require("../Queries/user.queries.js");
 
 const signupController = async(req,res)=>{
   const {body} = req;
@@ -98,4 +98,13 @@ const changeUserContactDetailsController = async(req,res)=>{
     res.status(500).json({error:error.message})
   }
 }
-module.exports = {signupController,loginController,changeUserPasswordController,changeUserProfileController,changeUserContactDetailsController};
+const findUserByPhoneNumberController = async(req,res)=>{
+  const {phoneNumber} = req.params;
+  try{
+    const user = await findUserByPhoneNumber(phoneNumber);
+    res.status(200).json({message:"User found",user})
+  }catch(error){
+    res.status(500).json({error:error.message})
+  }
+}
+module.exports = {signupController,loginController,changeUserPasswordController,changeUserProfileController,changeUserContactDetailsController,findUserByPhoneNumberController};

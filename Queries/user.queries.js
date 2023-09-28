@@ -60,5 +60,15 @@ const changeUserContactDetails= async(username,updatedContact)=>{
     throw error;
   }
 }
-
-module.exports = {createAccount,findUserByUsername,changeUserPassword,changeUserProfile,changeUserContactDetails};
+const findUserByPhoneNumber = async(phoneNumber)=>{
+  try{
+    const user = await User.findOne({phoneNumber});
+    if(!user){
+      throw new Error("No user found for "+phoneNumber);
+    }
+    return user;
+  }catch(error){
+    throw error;
+  }
+}
+module.exports = {createAccount,findUserByUsername,changeUserPassword,changeUserProfile,changeUserContactDetails,findUserByPhoneNumber};
