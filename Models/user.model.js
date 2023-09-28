@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
     unique:true
   },
   avatar:String,
+  phoneNumber:Number,
+  address:String
 },{timestamps:true})
 
 const User = mongoose.model("User",userSchema);
